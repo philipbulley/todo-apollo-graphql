@@ -8,10 +8,10 @@ async function server() {
     schema: await schema(),
     context,
     introspection: true,
-    playground: true,
+    playground: true
   });
 
-  const {url} = await server.listen();
+  const { url } = await server.listen();
   console.log(`🚀  Server ready at ${url}`);
 }
 
