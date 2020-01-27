@@ -1,2 +1,3 @@
-const hello: string = "hello world!";
-console.log(hello);
+import server from './server';
+
+server();
