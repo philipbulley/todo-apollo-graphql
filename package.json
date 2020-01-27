@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "workspaces": ["client", "server"],
+  "name": "todo-apollo-graphql",
+  "version": "1.0.0",
+  "description": "Simple todo app using Apollo and an in-memory server",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn workspace server start & yarn workspace client start"
+  },
+  "author": "",
+  "license": "ISC"
+}
