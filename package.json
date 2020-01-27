@@ -13,5 +13,14 @@
     "prettier": "yarn workspace server prettier && yarn workspace client prettier"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --pattern ./{*,**/*}.{ts,tsx,json,md,yml}"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.2.1",
+    "pretty-quick": "^2.0.1"
+  }
 }
