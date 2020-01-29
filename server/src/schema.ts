@@ -1,16 +1,26 @@
 import { gql, mergeSchemas } from 'apollo-server';
 import TodoList from './TodoList/TodoList.schema';
+import TodoListItem from './TodoListItem/TodoListItem.schema';
 import resolvers from './resolvers';
 
 const root = gql`
   type Query {
     version: String
   }
+  
+  interface Node {
+      id: ID!
+      name: String
+  }
+  
+  type PageInfo {
+      hasNextPage: Boolean
+  }
 `;
 
 const schema = async () =>
   mergeSchemas({
-    schemas: [root, TodoList],
+    schemas: [root, TodoList, TodoListItem],
     resolvers
   });
 

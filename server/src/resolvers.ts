@@ -1,8 +1,9 @@
-import TodoList from './TodoList/TodoList.resolver';
+import { TodoList, TodoListConnection } from './TodoList/TodoList.resolver';
 
 const resolvers = {
   Query: {
-    version: () => '1.0.0'
+    version: () => '1.0.0',
+    allTodoLists: TodoListConnection
   },
   TodoList
 };

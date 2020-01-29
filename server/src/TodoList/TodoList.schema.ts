@@ -1,7 +1,23 @@
-import {gql} from 'apollo-server';
+import { gql } from 'apollo-server';
 
 export default gql`
-  type TodoList {
-      name: String
+  extend type Query {
+    allTodoLists: TodoListConnection!
+  }
+
+  type TodoListConnection {
+    pageInfo: PageInfo!
+    edges: [TodoListEdge]!
+  }
+
+  type TodoListEdge {
+    cursor: String!
+    node: TodoList
+  }
+
+  type TodoList implements Node {
+    id: ID!
+    name: String
+    items: TodoListItemConnection!
   }
 `;
