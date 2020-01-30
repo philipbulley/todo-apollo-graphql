@@ -1,6 +1,7 @@
 import { TodoListItemConnection } from '../TodoListItem/TodoListItem.resolver';
+import { Resolver, ResolversTypes } from '../__generated__/graphql';
 
-export const TodoListConnection = () => ({
+export const TodoListConnection: Resolver<ResolversTypes['TodoListConnection']> = () => ({
   pageInfo: {
     hasNextPage: false
   },

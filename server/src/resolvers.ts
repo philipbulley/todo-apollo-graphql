@@ -1,6 +1,7 @@
 import { TodoList, TodoListConnection } from './TodoList/TodoList.resolver';
+import { Resolvers } from './__generated__/graphql';
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
     version: () => '1.0.0',
     allTodoLists: TodoListConnection
