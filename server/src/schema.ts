@@ -7,20 +7,21 @@ const root = gql`
   type Query {
     version: String
   }
-  
+
   interface Node {
-      id: ID!
-      name: String
+    id: ID!
+    name: String
   }
-  
+
   type PageInfo {
-      hasNextPage: Boolean
+    hasNextPage: Boolean
   }
 `;
 
 const schema = async () =>
   mergeSchemas({
     schemas: [root, TodoList, TodoListItem],
+
     resolvers
   });
 

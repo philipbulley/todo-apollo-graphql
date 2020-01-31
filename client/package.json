@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prettier": "prettier --write ./{*,**/*}.{ts,tsx,json,md,yml}"
+    "prettier": "prettier --write \"{*,**/*}.{ts,tsx,json,md,yml,css}\""
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

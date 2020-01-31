@@ -16,11 +16,13 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --pattern ./{*,**/*}.{ts,tsx,json,md,yml}"
+      "pre-commit": "pretty-quick --staged --pattern \"{*,**/*}.{ts,tsx,json,md,yml,css}\""
     }
   },
   "devDependencies": {
-    "husky": "^4.2.1",
     "pretty-quick": "^2.0.1"
+  },
+  "dependencies": {
+    "husky": "^4.2.1"
   }
 }
