@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon",
     "prettier": "prettier --write \"{*,**/*}.{ts,tsx,json,md,yml,css}\"",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "setup": "cd ./src/db && rm -f todo.db.sqlite3 && knex migrate:latest && knex seed:run"
   },
   "dependencies": {
     "apollo-server": "^2.9.16",
