@@ -1,10 +1,9 @@
 import { ApolloServer } from 'apollo-server';
 import schema from './schema';
 import knex from './db';
+import context from './context';
 
 async function server() {
-  const context = {};
-
   const server = new ApolloServer({
     schema: await schema(),
     context,

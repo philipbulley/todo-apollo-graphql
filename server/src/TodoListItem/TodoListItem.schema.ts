@@ -15,5 +15,7 @@ export default gql`
     id: ID!
     name: String
     done: Boolean!
+    createdAt: String!
+    updatedAt: String!
   }
 `;

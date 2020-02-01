@@ -3,7 +3,7 @@ import { Resolver, ResolversTypes } from '../__generated__/graphql';
 import knex from './../db';
 import { List, Lists } from '../db/types/lists';
 const Hashids = require('hashids/cjs');
-const hashids = new Hashids('lists');
+const hashids = new Hashids('TodoList');
 
 export const TodoListConnection: Resolver<ResolversTypes['TodoListConnection']> = async () => {
   const lists: Lists = await knex('lists').select('*');
@@ -12,13 +12,13 @@ export const TodoListConnection: Resolver<ResolversTypes['TodoListConnection']> 
     pageInfo: {
       hasNextPage: false
     },
-    edges: lists.map((row: List) => ({
-      cursor: hashids.encode(row.id),
+    edges: lists.map((list: List) => ({
+      cursor: hashids.encode(list.id),
       node: {
-        ...row,
-        id: row.id.toString(),
-        createdAt: row.created_at,
-        updatedAt: row.updated_at
+        ...list,
+        id: list.id.toString(),
+        createdAt: list.created_at,
+        updatedAt: list.updated_at
       }
     }))
   };
