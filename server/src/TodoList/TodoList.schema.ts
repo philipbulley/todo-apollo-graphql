@@ -19,5 +19,7 @@ export default gql`
     id: ID!
     name: String
     items: TodoListItemConnection!
+    createdAt: String!
+    updatedAt: String!
   }
 `;
