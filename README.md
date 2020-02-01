@@ -6,12 +6,14 @@ Inspired by [this tweet](https://twitter.com/mattrothenberg/status/1219623191712
 
 I'll probably build others eventually, but starting with Apollo GraphQL as it's my favourite stack at present.
 
-## Run 🏃🏽‍♀️
+## Quick Start 🏃🏽‍♀️
 
 This repo uses Yarn Workspaces and is set up so that the following should get things running:
 
 ```
-$ yarn && yarn start
+$ yarn install
+$ yarn setup
+$ yarn start
 ```
 
 
