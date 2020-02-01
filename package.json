@@ -9,6 +9,7 @@
   "description": "Simple todo app using Apollo and an in-memory server",
   "main": "index.js",
   "scripts": {
+    "setup": "yarn workspace server setup",
     "start": "yarn workspace server start & yarn workspace client start",
     "prettier": "yarn workspace server prettier && yarn workspace client prettier"
   },
