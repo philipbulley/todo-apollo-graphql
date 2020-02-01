@@ -12,3 +12,4 @@ generates:
       avoidOptionals: false
       useIndexSignature: true
       defaultMapper: DeepPartial<{T}>
+      contextType: ../context#Context
