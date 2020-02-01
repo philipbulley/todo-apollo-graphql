@@ -1,9 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import schema from './schema';
-
-const knex = require('knex')(
-  require('./db/knexfile')[process?.env?.NODE_ENV ?? 'development']
-);
+import knex from './db';
 
 async function server() {
   const context = {};
