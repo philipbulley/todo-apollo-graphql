@@ -4,7 +4,9 @@ import knex from '../db';
 import { findMany } from '../TodoListItem/TodoListItem.service';
 
 const todoListItemsLoader = new DataLoader<string, Items>(async listIds => {
-  const items = await findMany({whereIn: {list_id: listIds.map(id => +id)}});
+  const items = await findMany({
+    whereIn: { list_id: listIds.map(id => +id) }
+  });
 
   const itemsMap = items.reduce<Record<string, Items>>((acc, item) => {
     if (!acc[item.list_id]) {

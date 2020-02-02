@@ -10,7 +10,7 @@ export const todoListItemConnection: Resolver<
   DeepPartial<TodoList>,
   Context
 > = async (parent, args, context, info) => {
-  const items = await context.todoListItemsLoader.load(parent.id!) ?? [];
+  const items = (await context.todoListItemsLoader.load(parent.id!)) ?? [];
 
   return {
     pageInfo: {

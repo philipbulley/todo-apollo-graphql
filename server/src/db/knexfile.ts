@@ -1,7 +1,6 @@
 module.exports = {
-
   development: {
-    client: "sqlite3",
+    client: 'sqlite3',
     connection: {
       filename: `${__dirname}/todo.db.sqlite3`
     },
@@ -17,7 +16,7 @@ module.exports = {
   },
 
   test: {
-    client: "sqlite3",
+    client: 'sqlite3',
     connection: {
       filename: `:memory:`
     },
@@ -29,7 +28,7 @@ module.exports = {
       directory: `${__dirname}/seeds`
     },
     useNullAsDefault: true
-  },
+  }
 
   // staging: {
   //   client: "postgresql",
@@ -62,5 +61,4 @@ module.exports = {
   //     tableName: "knex_migrations"
   //   }
   // }
-
 };

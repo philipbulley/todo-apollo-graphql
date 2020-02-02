@@ -22,7 +22,7 @@ export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
 };
 
 export const todoList: QueryResolvers['todoList'] = async (parent, args) => {
-  const list: List | null = await findOne({where: args});
+  const list: List | null = await findOne({ where: args });
 
   return dbToGraphQL(list);
 };

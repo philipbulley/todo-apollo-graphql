@@ -2,8 +2,8 @@
 
 We're using a SQLite 3 Database with [Knex](https://knexjs.org/) as an ORM.
 
-* `development` uses a file based DB
-* `test` uses an in memory DB
+- `development` uses a file based DB
+- `test` uses an in memory DB
 
 ## References
 
@@ -71,4 +71,3 @@ Unlike migrations, all when seeds are run, all of the files are executed. They'r
 ```
 $ knex seed:run
 ```
-
