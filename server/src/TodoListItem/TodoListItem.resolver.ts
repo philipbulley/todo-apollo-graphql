@@ -70,7 +70,18 @@ export const deleteTodoListItem: MutationResolvers['deleteTodoListItem'] = async
     .where({ id: args.id })
     .del();
 
-  return { success: result === 1 };
+  return { success: result > 0 };
+};
+
+export const deleteTodoListItemsDone: MutationResolvers['deleteTodoListItemsDone'] = async (
+  parent,
+  args
+) => {
+  const result = await knex('items')
+    .where({ list_id: args.listId, done: true })
+    .del();
+
+  return { success: result > 0 };
 };
 
 export const updateTodoListItem: MutationResolvers['updateTodoListItem'] = async (
@@ -107,5 +118,6 @@ export const TodoListItemQuery = {
 export const TodoListItemMutation = {
   createTodoListItem,
   updateTodoListItem,
-  deleteTodoListItem
+  deleteTodoListItem,
+  deleteTodoListItemsDone
 };

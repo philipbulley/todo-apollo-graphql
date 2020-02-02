@@ -23,6 +23,7 @@ export type Mutation = {
   createTodoListItem?: Maybe<TodoListItem>;
   updateTodoListItem?: Maybe<TodoListItem>;
   deleteTodoListItem?: Maybe<Success>;
+  deleteTodoListItemsDone?: Maybe<Success>;
 };
 
 export type MutationCreateTodoListArgs = {
@@ -50,6 +51,10 @@ export type MutationUpdateTodoListItemArgs = {
 
 export type MutationDeleteTodoListItemArgs = {
   id: Scalars['ID'];
+};
+
+export type MutationDeleteTodoListItemsDoneArgs = {
+  listId: Scalars['ID'];
 };
 
 export type Node = {
@@ -132,7 +137,7 @@ export type TodoListItemEdge = {
 
 export type TodoListItemFields = {
   name?: Maybe<Scalars['String']>;
-  done: Scalars['Boolean'];
+  done?: Maybe<Scalars['Boolean']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -325,6 +330,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationDeleteTodoListItemArgs, 'id'>
+  >;
+  deleteTodoListItemsDone?: Resolver<
+    Maybe<ResolversTypes['Success']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTodoListItemsDoneArgs, 'listId'>
   >;
 }>;
 

@@ -9,6 +9,11 @@ export default gql`
     createTodoListItem(listId: ID!, fields: TodoListItemFields): TodoListItem
     updateTodoListItem(id: ID!, fields: TodoListItemFields!): TodoListItem
     deleteTodoListItem(id: ID!): Success
+
+    """
+    Deletes all items marked as \`done\` from with the specified list
+    """
+    deleteTodoListItemsDone(listId: ID!): Success
   }
 
   input TodoListItemFields {

@@ -32,7 +32,7 @@ $ yarn start
   - [x] Create Item
   - [x] Delete Item
   - [x] Update Item
-  - [ ] Delete Completed Items
+  - [x] Delete "Done" Items
 - [ ] Complete pagination implementation
 
 ### Client
