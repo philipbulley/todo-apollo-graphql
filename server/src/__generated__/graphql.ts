@@ -100,13 +100,13 @@ export type TodoList = Node & {
 export type TodoListConnection = {
   __typename?: 'TodoListConnection';
   pageInfo: PageInfo;
-  edges: Array<Maybe<TodoListEdge>>;
+  edges: Array<TodoListEdge>;
 };
 
 export type TodoListEdge = {
   __typename?: 'TodoListEdge';
   cursor: Scalars['String'];
-  node?: Maybe<TodoList>;
+  node: TodoList;
 };
 
 export type TodoListFields = {
@@ -126,13 +126,13 @@ export type TodoListItem = Node & {
 export type TodoListItemConnection = {
   __typename?: 'TodoListItemConnection';
   pageInfo: PageInfo;
-  edges: Array<Maybe<TodoListItemEdge>>;
+  edges: Array<TodoListItemEdge>;
 };
 
 export type TodoListItemEdge = {
   __typename?: 'TodoListItemEdge';
   cursor: Scalars['String'];
-  node?: Maybe<TodoListItem>;
+  node: TodoListItem;
 };
 
 export type TodoListItemFields = {
@@ -418,7 +418,7 @@ export type TodoListConnectionResolvers<
 > = ResolversObject<{
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   edges?: Resolver<
-    Array<Maybe<ResolversTypes['TodoListEdge']>>,
+    Array<ResolversTypes['TodoListEdge']>,
     ParentType,
     ContextType
   >;
@@ -430,7 +430,7 @@ export type TodoListEdgeResolvers<
   ParentType extends ResolversParentTypes['TodoListEdge'] = ResolversParentTypes['TodoListEdge']
 > = ResolversObject<{
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  node?: Resolver<Maybe<ResolversTypes['TodoList']>, ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['TodoList'], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn;
 }>;
 
@@ -453,7 +453,7 @@ export type TodoListItemConnectionResolvers<
 > = ResolversObject<{
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   edges?: Resolver<
-    Array<Maybe<ResolversTypes['TodoListItemEdge']>>,
+    Array<ResolversTypes['TodoListItemEdge']>,
     ParentType,
     ContextType
   >;
@@ -465,11 +465,7 @@ export type TodoListItemEdgeResolvers<
   ParentType extends ResolversParentTypes['TodoListItemEdge'] = ResolversParentTypes['TodoListItemEdge']
 > = ResolversObject<{
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  node?: Resolver<
-    Maybe<ResolversTypes['TodoListItem']>,
-    ParentType,
-    ContextType
-  >;
+  node?: Resolver<ResolversTypes['TodoListItem'], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn;
 }>;
 

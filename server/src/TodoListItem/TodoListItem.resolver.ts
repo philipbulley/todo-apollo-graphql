@@ -28,7 +28,7 @@ export const todoListItemConnection: Resolver<
     },
     edges: items.map(item => ({
       cursor: hashids.encode(item.id),
-      node: dbToGraphQL(item)
+      node: dbToGraphQL(item)!
     }))
   };
 };

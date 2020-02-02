@@ -23,12 +23,12 @@ export default gql`
 
   type TodoListItemConnection {
     pageInfo: PageInfo!
-    edges: [TodoListItemEdge]!
+    edges: [TodoListItemEdge!]!
   }
 
   type TodoListItemEdge {
     cursor: String!
-    node: TodoListItem
+    node: TodoListItem!
   }
 
   type TodoListItem implements Node {

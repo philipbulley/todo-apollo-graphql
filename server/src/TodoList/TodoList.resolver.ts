@@ -18,7 +18,7 @@ export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
     },
     edges: lists.map((list: List) => ({
       cursor: hashids.encode(list.id),
-      node: dbToGraphQL(list)
+      node: dbToGraphQL(list)!
     }))
   };
 };
