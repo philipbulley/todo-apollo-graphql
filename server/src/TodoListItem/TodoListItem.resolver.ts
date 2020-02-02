@@ -4,7 +4,7 @@ import { DeepPartial } from 'utility-types';
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoListItem');
 
-export const TodoListItemConnection: Resolver<
+export const todoListItemConnection: Resolver<
   ResolversTypes['TodoListItemConnection'],
   DeepPartial<TodoList>,
   Context

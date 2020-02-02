@@ -1,11 +1,11 @@
-import { TodoListItemConnection } from '../TodoListItem/TodoListItem.resolver';
-import { Resolver, ResolversTypes } from '../__generated__/graphql';
+import { todoListItemConnection } from '../TodoListItem/TodoListItem.resolver';
+import { QueryResolvers } from '../__generated__/graphql';
 import knex from './../db';
 import { List, Lists } from '../db/types/lists';
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoList');
 
-export const TodoListConnection: Resolver<ResolversTypes['TodoListConnection']> = async () => {
+export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
   const lists: Lists = await knex('lists').select('*');
 
   return {
@@ -24,6 +24,25 @@ export const TodoListConnection: Resolver<ResolversTypes['TodoListConnection']> 
   };
 };
 
+export const todoList: QueryResolvers['todoList'] = async (parent, args) => {
+  const lists: Lists = await knex('lists')
+    .select('*')
+    .where('id', args.id);
+
+  if (!lists.length) {
+    return null;
+  }
+
+  const list = lists[0];
+
+  return {
+    ...list,
+    id: list.id.toString(),
+    createdAt: list.created_at,
+    updatedAt: list.updated_at
+  };
+};
+
 export const TodoList = {
-  items: TodoListItemConnection
+  items: todoListItemConnection
 };

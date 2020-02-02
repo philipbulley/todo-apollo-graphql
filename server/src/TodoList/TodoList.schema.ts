@@ -3,6 +3,7 @@ import { gql } from 'apollo-server';
 export default gql`
   extend type Query {
     allTodoLists: TodoListConnection!
+    todoList(id: ID!): TodoList
   }
 
   type TodoListConnection {

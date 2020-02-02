@@ -2,6 +2,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { Context } from '../context';
 import { DeepPartial } from 'utility-types';
 export type Maybe<T> = T | null | undefined;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -25,6 +26,12 @@ export type Query = {
    __typename?: 'Query',
   version?: Maybe<Scalars['String']>,
   allTodoLists: TodoListConnection,
+  todoList?: Maybe<TodoList>,
+};
+
+
+export type QueryTodoListArgs = {
+  id: Scalars['ID']
 };
 
 export type TodoList = Node & {
@@ -187,6 +194,7 @@ export type PageInfoResolvers<ContextType = Context, ParentType extends Resolver
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   version?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   allTodoLists?: Resolver<ResolversTypes['TodoListConnection'], ParentType, ContextType>,
+  todoList?: Resolver<Maybe<ResolversTypes['TodoList']>, ParentType, ContextType, RequireFields<QueryTodoListArgs, 'id'>>,
 }>;
 
 export type TodoListResolvers<ContextType = Context, ParentType extends ResolversParentTypes['TodoList'] = ResolversParentTypes['TodoList']> = ResolversObject<{

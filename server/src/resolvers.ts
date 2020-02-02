@@ -1,10 +1,11 @@
-import { TodoList, TodoListConnection } from './TodoList/TodoList.resolver';
+import { TodoList, todoListConnection, todoList } from './TodoList/TodoList.resolver';
 import { Resolvers } from './__generated__/graphql';
 
 const resolvers: Resolvers = {
   Query: {
     version: () => '1.0.0',
-    allTodoLists: TodoListConnection
+    allTodoLists: todoListConnection,
+    todoList: todoList
   },
   TodoList
 };
