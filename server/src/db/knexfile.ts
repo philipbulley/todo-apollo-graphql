@@ -12,7 +12,8 @@ module.exports = {
       extension: 'ts',
       directory: `${__dirname}/seeds`
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    debug: true
   },
 
   test: {
