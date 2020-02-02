@@ -7,6 +7,8 @@ const root = gql`
   type Query {
     version: String
   }
+  
+  type Mutation
 
   interface Node {
     id: ID!

@@ -6,6 +6,14 @@ export default gql`
     todoList(id: ID!): TodoList
   }
 
+  extend type Mutation {
+    createTodoList(options: CreateTodoListOptions!): TodoList
+  }
+
+  input CreateTodoListOptions {
+    name: String!
+  }
+
   type TodoListConnection {
     pageInfo: PageInfo!
     edges: [TodoListEdge]!

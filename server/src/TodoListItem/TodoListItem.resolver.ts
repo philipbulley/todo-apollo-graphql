@@ -1,6 +1,7 @@
 import { Resolver, ResolversTypes, TodoList } from '../__generated__/graphql';
 import { Context } from '../context';
 import { DeepPartial } from 'utility-types';
+import { Item } from '../db/types/Items';
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoListItem');
 
@@ -17,12 +18,15 @@ export const todoListItemConnection: Resolver<
     },
     edges: items.map(item => ({
       cursor: hashids.encode(item.id),
-      node: {
-        ...item,
-        id: item.id.toString(),
-        createdAt: item.created_at,
-        updatedAt: item.updated_at
-      }
+      node: dbToGraphQL(item)
     }))
   };
 };
+
+const dbToGraphQL = (item: Item | null) =>
+  item && {
+    ...item,
+    id: item.id.toString(),
+    createdAt: item.created_at,
+    updatedAt: item.updated_at
+  };

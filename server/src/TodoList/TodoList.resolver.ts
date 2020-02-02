@@ -1,12 +1,14 @@
 import { todoListItemConnection } from '../TodoListItem/TodoListItem.resolver';
-import { QueryResolvers } from '../__generated__/graphql';
+import { MutationResolvers, QueryResolvers } from '../__generated__/graphql';
 import knex from './../db';
-import { List, Lists } from '../db/types/lists';
+import { List } from '../db/types/Lists';
+import { findOne, findMany } from './TodoList.service';
+
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoList');
 
 export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
-  const lists: Lists = await knex('lists').select('*');
+  const lists = await findMany();
 
   return {
     pageInfo: {
@@ -14,35 +16,38 @@ export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
     },
     edges: lists.map((list: List) => ({
       cursor: hashids.encode(list.id),
-      node: {
-        ...list,
-        id: list.id.toString(),
-        createdAt: list.created_at,
-        updatedAt: list.updated_at
-      }
+      node: dbToGraphQL(list)
     }))
   };
 };
 
 export const todoList: QueryResolvers['todoList'] = async (parent, args) => {
-  const lists: Lists = await knex('lists')
-    .select('*')
-    .where('id', args.id);
+  const list: List | null = await findOne(args);
 
-  if (!lists.length) {
-    return null;
-  }
+  return dbToGraphQL(list);
+};
 
-  const list = lists[0];
+export const createTodoList: MutationResolvers['createTodoList'] = async (
+  parent,
+  args
+) => {
+  console.log(args);
 
-  return {
-    ...list,
-    id: list.id.toString(),
-    createdAt: list.created_at,
-    updatedAt: list.updated_at
-  };
+  const ids = await knex('lists').insert({
+    name: args.options.name
+  });
+
+  return dbToGraphQL(await findOne({ id: ids[0] }));
 };
 
 export const TodoList = {
   items: todoListItemConnection
 };
+
+const dbToGraphQL = (list: List | null) =>
+  list && {
+    ...list,
+    id: list.id.toString(),
+    createdAt: list.created_at,
+    updatedAt: list.updated_at
+  };

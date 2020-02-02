@@ -12,6 +12,20 @@ export type Scalars = {
   Float: number,
 };
 
+export type CreateTodoListOptions = {
+  name: Scalars['String'],
+};
+
+export type Mutation = {
+   __typename?: 'Mutation',
+  createTodoList?: Maybe<TodoList>,
+};
+
+
+export type MutationCreateTodoListArgs = {
+  options: CreateTodoListOptions
+};
+
 export type Node = {
   id: Scalars['ID'],
   name?: Maybe<Scalars['String']>,
@@ -162,6 +176,8 @@ export type ResolversTypes = ResolversObject<{
   TodoListItemConnection: ResolverTypeWrapper<DeepPartial<TodoListItemConnection>>,
   TodoListItemEdge: ResolverTypeWrapper<DeepPartial<TodoListItemEdge>>,
   TodoListItem: ResolverTypeWrapper<DeepPartial<TodoListItem>>,
+  Mutation: ResolverTypeWrapper<{}>,
+  CreateTodoListOptions: ResolverTypeWrapper<DeepPartial<CreateTodoListOptions>>,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -178,6 +194,12 @@ export type ResolversParentTypes = ResolversObject<{
   TodoListItemConnection: DeepPartial<TodoListItemConnection>,
   TodoListItemEdge: DeepPartial<TodoListItemEdge>,
   TodoListItem: DeepPartial<TodoListItem>,
+  Mutation: {},
+  CreateTodoListOptions: DeepPartial<CreateTodoListOptions>,
+}>;
+
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createTodoList?: Resolver<Maybe<ResolversTypes['TodoList']>, ParentType, ContextType, RequireFields<MutationCreateTodoListArgs, 'options'>>,
 }>;
 
 export type NodeResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = ResolversObject<{
@@ -240,6 +262,7 @@ export type TodoListItemEdgeResolvers<ContextType = Context, ParentType extends 
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
+  Mutation?: MutationResolvers<ContextType>,
   Node?: NodeResolvers,
   PageInfo?: PageInfoResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
