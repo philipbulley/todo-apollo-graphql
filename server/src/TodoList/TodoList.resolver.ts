@@ -34,7 +34,7 @@ export const createTodoList: MutationResolvers['createTodoList'] = async (
   args
 ) => {
   const ids = await knex('lists').insert({
-    name: args.options.name
+    name: args.fields.name
   });
 
   return dbToGraphQL(await findOne({ where: { id: ids[0] } }));
@@ -47,11 +47,11 @@ export const deleteTodoList: MutationResolvers['deleteTodoList'] = async (
   const result = await knex.transaction(async (trx: Knex.Transaction) => {
     await trx
       .table('items')
-      .where({ list_id: args.options.id })
+      .where({ list_id: args.id })
       .del();
     await trx
       .table('lists')
-      .where({ id: args.options.id })
+      .where({ id: args.id })
       .del();
     return true;
   });
@@ -64,17 +64,17 @@ export const updateTodoList: MutationResolvers['updateTodoList'] = async (
   args
 ) => {
   const result = await knex('lists')
-    .where({ id: args.options.id })
-    .update({ ...args.options, updated_at: knex.fn.now() });
+    .where({ id: args.id })
+    .update({ ...args.fields, updated_at: knex.fn.now() });
 
   if (result === 0) {
     throw new ApolloError(
-      `Can't find list with id:${args.options.id} to update`,
+      `Can't find list with id:${args.id} to update`,
       '404'
     );
   }
 
-  return dbToGraphQL(await findOne({ where: { id: +args.options.id } }));
+  return dbToGraphQL(await findOne({ where: { id: +args.id } }));
 };
 
 export const TodoList = {
