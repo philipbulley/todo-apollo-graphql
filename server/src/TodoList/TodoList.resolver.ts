@@ -69,7 +69,8 @@ export const updateTodoList: MutationResolvers['updateTodoList'] = async (
 
   if (result === 0) {
     throw new ApolloError(
-      `Can't find list with id:${args.options.id} to update`
+      `Can't find list with id:${args.options.id} to update`,
+      '404'
     );
   }
 
