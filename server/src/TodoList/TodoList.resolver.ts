@@ -65,7 +65,7 @@ export const updateTodoList: MutationResolvers['updateTodoList'] = async (
 ) => {
   const result = await knex('lists')
     .where({ id: args.options.id })
-    .update(args.options);
+    .update({ ...args.options, updated_at: knex.fn.now() });
 
   if (result === 0) {
     throw new ApolloError(
