@@ -22,7 +22,7 @@ export const todoListConnection: QueryResolvers['allTodoLists'] = async () => {
 };
 
 export const todoList: QueryResolvers['todoList'] = async (parent, args) => {
-  const list: List | null = await findOne(args);
+  const list: List | null = await findOne({where: args});
 
   return dbToGraphQL(list);
 };
@@ -37,7 +37,7 @@ export const createTodoList: MutationResolvers['createTodoList'] = async (
     name: args.options.name
   });
 
-  return dbToGraphQL(await findOne({ id: ids[0] }));
+  return dbToGraphQL(await findOne({ where: { id: ids[0] } }));
 };
 
 export const TodoList = {

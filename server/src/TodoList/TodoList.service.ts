@@ -1,18 +1,17 @@
-import knex from '../db';
 import { List, Lists } from '../db/types/Lists';
 
-export async function findMany(where?: Partial<List>): Promise<Lists> {
-  const query = knex('lists').select('*');
+import {
+  findMany as _findMany,
+  findOne as _findOne,
+  FindOptions
+} from '../db/find';
 
-  if (where) {
-    Object.entries(where).forEach(([key, value]) => query.where(key, value));
-  }
-
-  const result = await query;
-  return result.length ? result : null;
+export async function findMany(options?: FindOptions<List>): Promise<Lists> {
+  return _findMany<Lists>('lists', options);
 }
 
-export async function findOne(where: Partial<List>): Promise<List | null> {
-  const result = await findMany(where);
-  return result.length ? result[0] : null;
+export async function findOne(
+  options: FindOptions<List>
+): Promise<List | null> {
+  return _findOne<List>('lists', options);
 }
