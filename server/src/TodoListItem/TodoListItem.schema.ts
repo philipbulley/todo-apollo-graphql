@@ -1,6 +1,10 @@
 import { gql } from 'apollo-server';
 
 export default gql`
+  extend type Query {
+    todoListItem(id: ID!): TodoListItem
+  }
+
   type TodoListItemConnection {
     pageInfo: PageInfo!
     edges: [TodoListItemEdge]!

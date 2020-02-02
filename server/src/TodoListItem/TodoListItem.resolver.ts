@@ -1,7 +1,13 @@
-import { Resolver, ResolversTypes, TodoList } from '../__generated__/graphql';
+import {
+  QueryResolvers,
+  Resolver,
+  ResolversTypes,
+  TodoList
+} from '../__generated__/graphql';
 import { Context } from '../context';
 import { DeepPartial } from 'utility-types';
 import { Item } from '../db/types/Items';
+import { findOne } from './TodoListItem.service';
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoListItem');
 
@@ -21,6 +27,15 @@ export const todoListItemConnection: Resolver<
       node: dbToGraphQL(item)
     }))
   };
+};
+
+export const todoListItem: QueryResolvers['todoListItem'] = async (
+  parent,
+  args
+) => {
+  const item: Item | null = await findOne({ where: args });
+
+  return dbToGraphQL(item);
 };
 
 const dbToGraphQL = (item: Item | null) =>

@@ -43,9 +43,14 @@ export type Query = {
   version?: Maybe<Scalars['String']>;
   allTodoLists: TodoListConnection;
   todoList?: Maybe<TodoList>;
+  todoListItem?: Maybe<TodoListItem>;
 };
 
 export type QueryTodoListArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryTodoListItemArgs = {
   id: Scalars['ID'];
 };
 
@@ -292,6 +297,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QueryTodoListArgs, 'id'>
+  >;
+  todoListItem?: Resolver<
+    Maybe<ResolversTypes['TodoListItem']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryTodoListItemArgs, 'id'>
   >;
 }>;
 
