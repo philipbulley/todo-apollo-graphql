@@ -45,3 +45,9 @@ const dbToGraphQL = (item: Item | null) =>
     createdAt: item.created_at,
     updatedAt: item.updated_at
   };
+
+export const TodoListItemQuery = {
+  todoListItem
+};
+
+export const TodoListItemMutation = {};

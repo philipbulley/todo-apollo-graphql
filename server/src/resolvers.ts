@@ -1,21 +1,23 @@
 import {
   TodoList,
-  todoListConnection,
-  todoList,
-  createTodoList
+  TodoListQuery,
+  TodoListMutation
 } from './TodoList/TodoList.resolver';
 import { Resolvers } from './__generated__/graphql';
-import { todoListItem } from './TodoListItem/TodoListItem.resolver';
+import {
+  TodoListItemMutation,
+  TodoListItemQuery
+} from './TodoListItem/TodoListItem.resolver';
 
 const resolvers: Resolvers = {
   Query: {
     version: () => '1.0.0',
-    allTodoLists: todoListConnection,
-    todoList,
-    todoListItem
+    ...TodoListQuery,
+    ...TodoListItemQuery
   },
   Mutation: {
-    createTodoList
+    ...TodoListMutation,
+    ...TodoListItemMutation
   },
   TodoList
 };

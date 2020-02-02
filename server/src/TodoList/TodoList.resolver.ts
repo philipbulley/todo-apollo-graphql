@@ -51,3 +51,12 @@ const dbToGraphQL = (list: List | null) =>
     createdAt: list.created_at,
     updatedAt: list.updated_at
   };
+
+export const TodoListQuery = {
+  allTodoLists: todoListConnection,
+  todoList
+};
+
+export const TodoListMutation = {
+  createTodoList
+};
