@@ -15,11 +15,11 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreateTodoListOptions = {
+export type CreateTodoListFields = {
   name: Scalars['String'];
 };
 
-export type DeleteTodoListOptions = {
+export type DeleteTodoListFields = {
   id: Scalars['ID'];
 };
 
@@ -31,15 +31,15 @@ export type Mutation = {
 };
 
 export type MutationCreateTodoListArgs = {
-  options: CreateTodoListOptions;
+  options: CreateTodoListFields;
 };
 
 export type MutationUpdateTodoListArgs = {
-  options: UpdateTodoListOptions;
+  options: UpdateTodoListFields;
 };
 
 export type MutationDeleteTodoListArgs = {
-  options: DeleteTodoListOptions;
+  options: DeleteTodoListFields;
 };
 
 export type Node = {
@@ -115,9 +115,9 @@ export type TodoListItemEdge = {
   node?: Maybe<TodoListItem>;
 };
 
-export type UpdateTodoListOptions = {
+export type UpdateTodoListFields = {
   id: Scalars['ID'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -246,15 +246,9 @@ export type ResolversTypes = ResolversObject<{
   TodoListItemEdge: ResolverTypeWrapper<DeepPartial<TodoListItemEdge>>;
   TodoListItem: ResolverTypeWrapper<DeepPartial<TodoListItem>>;
   Mutation: ResolverTypeWrapper<{}>;
-  CreateTodoListOptions: ResolverTypeWrapper<
-    DeepPartial<CreateTodoListOptions>
-  >;
-  UpdateTodoListOptions: ResolverTypeWrapper<
-    DeepPartial<UpdateTodoListOptions>
-  >;
-  DeleteTodoListOptions: ResolverTypeWrapper<
-    DeepPartial<DeleteTodoListOptions>
-  >;
+  CreateTodoListFields: ResolverTypeWrapper<DeepPartial<CreateTodoListFields>>;
+  UpdateTodoListFields: ResolverTypeWrapper<DeepPartial<UpdateTodoListFields>>;
+  DeleteTodoListFields: ResolverTypeWrapper<DeepPartial<DeleteTodoListFields>>;
   Success: ResolverTypeWrapper<DeepPartial<Success>>;
 }>;
 
@@ -273,9 +267,9 @@ export type ResolversParentTypes = ResolversObject<{
   TodoListItemEdge: DeepPartial<TodoListItemEdge>;
   TodoListItem: DeepPartial<TodoListItem>;
   Mutation: {};
-  CreateTodoListOptions: DeepPartial<CreateTodoListOptions>;
-  UpdateTodoListOptions: DeepPartial<UpdateTodoListOptions>;
-  DeleteTodoListOptions: DeepPartial<DeleteTodoListOptions>;
+  CreateTodoListFields: DeepPartial<CreateTodoListFields>;
+  UpdateTodoListFields: DeepPartial<UpdateTodoListFields>;
+  DeleteTodoListFields: DeepPartial<DeleteTodoListFields>;
   Success: DeepPartial<Success>;
 }>;
 
