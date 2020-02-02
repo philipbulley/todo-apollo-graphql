@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FunctionComponent } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Lists from './Lists/Lists';
+import Items from './Items/Items';
+import { createGlobalStyle } from 'styled-components';
+import Bar from './Bar/Bar';
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStyle />
+      <Bar />
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/lists" />
+        </Route>
+        <Route exact component={Lists} path="/lists" />
+        <Route exact component={Items} path="/lists/:listId" />
+      </Switch>
+    </BrowserRouter>
   );
 };
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
