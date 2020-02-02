@@ -28,7 +28,7 @@ $ yarn start
 - [ ] Create mutations
   - [x] Create List
   - [x] Delete List (and child items)
-  - [ ] Update List
+  - [x] Update List
   - [ ] Create Item
   - [ ] Delete Item
   - [ ] Update Item

@@ -4,6 +4,7 @@ import knex from './../db';
 import { List } from '../db/types/Lists';
 import { findOne, findMany } from './TodoList.service';
 import Knex from 'knex';
+import { ApolloError } from 'apollo-server';
 
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoList');
@@ -58,6 +59,23 @@ export const deleteTodoList: MutationResolvers['deleteTodoList'] = async (
   return { success: result };
 };
 
+export const updateTodoList: MutationResolvers['updateTodoList'] = async (
+  parent,
+  args
+) => {
+  const result = await knex('lists')
+    .where({ id: args.options.id })
+    .update(args.options);
+
+  if (result === 0) {
+    throw new ApolloError(
+      `Can't find list with id:${args.options.id} to update`
+    );
+  }
+
+  return dbToGraphQL(await findOne({ where: { id: +args.options.id } }));
+};
+
 export const TodoList = {
   items: todoListItemConnection
 };
@@ -77,5 +95,6 @@ export const TodoListQuery = {
 
 export const TodoListMutation = {
   createTodoList,
+  updateTodoList,
   deleteTodoList
 };

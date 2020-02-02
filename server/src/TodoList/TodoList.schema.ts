@@ -8,11 +8,17 @@ export default gql`
 
   extend type Mutation {
     createTodoList(options: CreateTodoListOptions!): TodoList
+    updateTodoList(options: UpdateTodoListOptions!): TodoList
     deleteTodoList(options: DeleteTodoListOptions!): Success
   }
 
   input CreateTodoListOptions {
     name: String!
+  }
+
+  input UpdateTodoListOptions {
+    id: ID!
+    name: String
   }
 
   input DeleteTodoListOptions {

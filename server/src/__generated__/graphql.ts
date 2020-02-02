@@ -26,11 +26,16 @@ export type DeleteTodoListOptions = {
 export type Mutation = {
   __typename?: 'Mutation';
   createTodoList?: Maybe<TodoList>;
+  updateTodoList?: Maybe<TodoList>;
   deleteTodoList?: Maybe<Success>;
 };
 
 export type MutationCreateTodoListArgs = {
   options: CreateTodoListOptions;
+};
+
+export type MutationUpdateTodoListArgs = {
+  options: UpdateTodoListOptions;
 };
 
 export type MutationDeleteTodoListArgs = {
@@ -108,6 +113,11 @@ export type TodoListItemEdge = {
   __typename?: 'TodoListItemEdge';
   cursor: Scalars['String'];
   node?: Maybe<TodoListItem>;
+};
+
+export type UpdateTodoListOptions = {
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -239,6 +249,9 @@ export type ResolversTypes = ResolversObject<{
   CreateTodoListOptions: ResolverTypeWrapper<
     DeepPartial<CreateTodoListOptions>
   >;
+  UpdateTodoListOptions: ResolverTypeWrapper<
+    DeepPartial<UpdateTodoListOptions>
+  >;
   DeleteTodoListOptions: ResolverTypeWrapper<
     DeepPartial<DeleteTodoListOptions>
   >;
@@ -261,6 +274,7 @@ export type ResolversParentTypes = ResolversObject<{
   TodoListItem: DeepPartial<TodoListItem>;
   Mutation: {};
   CreateTodoListOptions: DeepPartial<CreateTodoListOptions>;
+  UpdateTodoListOptions: DeepPartial<UpdateTodoListOptions>;
   DeleteTodoListOptions: DeepPartial<DeleteTodoListOptions>;
   Success: DeepPartial<Success>;
 }>;
@@ -274,6 +288,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateTodoListArgs, 'options'>
+  >;
+  updateTodoList?: Resolver<
+    Maybe<ResolversTypes['TodoList']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateTodoListArgs, 'options'>
   >;
   deleteTodoList?: Resolver<
     Maybe<ResolversTypes['Success']>,
