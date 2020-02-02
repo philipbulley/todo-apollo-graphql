@@ -26,6 +26,7 @@ export type Mutation = {
   updateTodoList?: Maybe<TodoList>;
   deleteTodoList?: Maybe<Success>;
   createTodoListItem?: Maybe<TodoListItem>;
+  deleteTodoListItem?: Maybe<Success>;
 };
 
 export type MutationCreateTodoListArgs = {
@@ -44,6 +45,10 @@ export type MutationDeleteTodoListArgs = {
 export type MutationCreateTodoListItemArgs = {
   listId: Scalars['ID'];
   fields?: Maybe<CreateTodoListItemFields>;
+};
+
+export type MutationDeleteTodoListItemArgs = {
+  id: Scalars['ID'];
 };
 
 export type Node = {
@@ -105,6 +110,7 @@ export type TodoListFields = {
 export type TodoListItem = Node & {
   __typename?: 'TodoListItem';
   id: Scalars['ID'];
+  listId: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   done: Scalars['Boolean'];
   createdAt: Scalars['String'];
@@ -304,6 +310,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationCreateTodoListItemArgs, 'listId'>
   >;
+  deleteTodoListItem?: Resolver<
+    Maybe<ResolversTypes['Success']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTodoListItemArgs, 'id'>
+  >;
 }>;
 
 export type NodeResolvers<
@@ -406,6 +418,7 @@ export type TodoListItemResolvers<
   ParentType extends ResolversParentTypes['TodoListItem'] = ResolversParentTypes['TodoListItem']
 > = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  listId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   done?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

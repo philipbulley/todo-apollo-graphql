@@ -10,6 +10,7 @@ export default gql`
       listId: ID!
       fields: CreateTodoListItemFields
     ): TodoListItem
+    deleteTodoListItem(id: ID!): Success
   }
 
   input CreateTodoListItemFields {
@@ -29,6 +30,7 @@ export default gql`
 
   type TodoListItem implements Node {
     id: ID!
+    listId: String!
     name: String
     done: Boolean!
     createdAt: String!

@@ -30,7 +30,7 @@ $ yarn start
   - [x] Delete List (and child items)
   - [x] Update List
   - [x] Create Item
-  - [ ] Delete Item
+  - [x] Delete Item
   - [ ] Update Item
   - [ ] Delete Completed Items
 - [ ] Complete pagination implementation

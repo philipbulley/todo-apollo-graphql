@@ -62,12 +62,24 @@ export const createTodoListItem: MutationResolvers['createTodoListItem'] = async
   return dbToGraphQL(await findOne({ where: { id: ids[0] } }));
 };
 
+export const deleteTodoListItem: MutationResolvers['deleteTodoListItem'] = async (
+  parent,
+  args
+) => {
+  const result = await knex('items')
+    .where({ id: args.id })
+    .del();
+
+  return { success: result === 1 };
+};
+
 const dbToGraphQL = (item: Item | null) =>
   item && {
     ...item,
     id: item.id.toString(),
     createdAt: item.created_at,
-    updatedAt: item.updated_at
+    updatedAt: item.updated_at,
+    listId: item.list_id.toString()
   };
 
 export const TodoListItemQuery = {
@@ -75,5 +87,6 @@ export const TodoListItemQuery = {
 };
 
 export const TodoListItemMutation = {
-  createTodoListItem
+  createTodoListItem,
+  deleteTodoListItem
 };
