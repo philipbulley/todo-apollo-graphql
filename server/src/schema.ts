@@ -18,6 +18,10 @@ const root = gql`
   type PageInfo {
     hasNextPage: Boolean
   }
+
+  type Success {
+    success: Boolean
+  }
 `;
 
 const schema = async () =>

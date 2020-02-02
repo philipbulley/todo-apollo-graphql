@@ -3,6 +3,7 @@ import { MutationResolvers, QueryResolvers } from '../__generated__/graphql';
 import knex from './../db';
 import { List } from '../db/types/Lists';
 import { findOne, findMany } from './TodoList.service';
+import Knex from 'knex';
 
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoList');
@@ -31,13 +32,30 @@ export const createTodoList: MutationResolvers['createTodoList'] = async (
   parent,
   args
 ) => {
-  console.log(args);
-
   const ids = await knex('lists').insert({
     name: args.options.name
   });
 
   return dbToGraphQL(await findOne({ where: { id: ids[0] } }));
+};
+
+export const deleteTodoList: MutationResolvers['deleteTodoList'] = async (
+  parent,
+  args
+) => {
+  const result = await knex.transaction(async (trx: Knex.Transaction) => {
+    await trx
+      .table('items')
+      .where({ list_id: args.options.id })
+      .del();
+    await trx
+      .table('lists')
+      .where({ id: args.options.id })
+      .del();
+    return true;
+  });
+
+  return { success: result };
 };
 
 export const TodoList = {
@@ -58,5 +76,6 @@ export const TodoListQuery = {
 };
 
 export const TodoListMutation = {
-  createTodoList
+  createTodoList,
+  deleteTodoList
 };

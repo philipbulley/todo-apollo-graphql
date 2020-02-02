@@ -19,13 +19,22 @@ export type CreateTodoListOptions = {
   name: Scalars['String'];
 };
 
+export type DeleteTodoListOptions = {
+  id: Scalars['ID'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createTodoList?: Maybe<TodoList>;
+  deleteTodoList?: Maybe<Success>;
 };
 
 export type MutationCreateTodoListArgs = {
   options: CreateTodoListOptions;
+};
+
+export type MutationDeleteTodoListArgs = {
+  options: DeleteTodoListOptions;
 };
 
 export type Node = {
@@ -52,6 +61,11 @@ export type QueryTodoListArgs = {
 
 export type QueryTodoListItemArgs = {
   id: Scalars['ID'];
+};
+
+export type Success = {
+  __typename?: 'Success';
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type TodoList = Node & {
@@ -225,6 +239,10 @@ export type ResolversTypes = ResolversObject<{
   CreateTodoListOptions: ResolverTypeWrapper<
     DeepPartial<CreateTodoListOptions>
   >;
+  DeleteTodoListOptions: ResolverTypeWrapper<
+    DeepPartial<DeleteTodoListOptions>
+  >;
+  Success: ResolverTypeWrapper<DeepPartial<Success>>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -243,6 +261,8 @@ export type ResolversParentTypes = ResolversObject<{
   TodoListItem: DeepPartial<TodoListItem>;
   Mutation: {};
   CreateTodoListOptions: DeepPartial<CreateTodoListOptions>;
+  DeleteTodoListOptions: DeepPartial<DeleteTodoListOptions>;
+  Success: DeepPartial<Success>;
 }>;
 
 export type MutationResolvers<
@@ -254,6 +274,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateTodoListArgs, 'options'>
+  >;
+  deleteTodoList?: Resolver<
+    Maybe<ResolversTypes['Success']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTodoListArgs, 'options'>
   >;
 }>;
 
@@ -304,6 +330,14 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryTodoListItemArgs, 'id'>
   >;
+}>;
+
+export type SuccessResolvers<
+  ContextType = Context,
+  ParentType extends ResolversParentTypes['Success'] = ResolversParentTypes['Success']
+> = ResolversObject<{
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn;
 }>;
 
 export type TodoListResolvers<
@@ -387,6 +421,7 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
   Node?: NodeResolvers;
   PageInfo?: PageInfoResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Success?: SuccessResolvers<ContextType>;
   TodoList?: TodoListResolvers<ContextType>;
   TodoListConnection?: TodoListConnectionResolvers<ContextType>;
   TodoListEdge?: TodoListEdgeResolvers<ContextType>;

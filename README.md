@@ -16,45 +16,43 @@ $ yarn setup
 $ yarn start
 ```
 
-
 ## Work In Progress / Roadmap 👷🏽‍♂
 
 ### Server
 
-* [x]  Create read Schema
-* [x]  Create stub read Resolvers
-* [x]  Add graphql-codegen
-* [x]  Add DB
-* [x]  Wire up read Resolvers to DB queries
-* [ ]  Create mutations
-    * [ ] Create List
-    * [ ] Delete List
-    * [ ] Update List
-    * [ ] Create Item
-    * [ ] Delete Item
-    * [ ] Update Item
-    * [ ] Delete Completed Items
-* [ ] Complete pagination implementation
-
+- [x] Create read Schema
+- [x] Create stub read Resolvers
+- [x] Add graphql-codegen
+- [x] Add DB
+- [x] Wire up read Resolvers to DB queries
+- [ ] Create mutations
+  - [x] Create List
+  - [x] Delete List (and child items)
+  - [ ] Update List
+  - [ ] Create Item
+  - [ ] Delete Item
+  - [ ] Update Item
+  - [ ] Delete Completed Items
+- [ ] Complete pagination implementation
 
 ### Client
 
-* [ ] Add Apollo Client
-* [ ] View Lists
-* [ ] View Items in Lists
-* [ ] Create new Lists
-* [ ] Create new Items in Lists
-* [ ] Complete Items in Lists
-* [ ] Delete Lists
-* [ ] Delete Items in Lists
-* [ ] Update List name
-* [ ] Update Item name
-
+- [ ] Add Apollo Client
+- [ ] View Lists
+- [ ] View Items in Lists
+- [ ] Create new Lists
+- [ ] Create new Items in Lists
+- [ ] Complete Items in Lists
+- [ ] Delete Lists
+- [ ] Delete Items in Lists
+- [ ] Update List name
+- [ ] Update Item name
 
 ## Tech
-* Apollo Server & Apollo Client
-* Sqlite3 / Knex
-* GraphQL Codegen
-* TypeScript
-* React / react-scripts
-* Prettier / pretty-quick / husky
+
+- Apollo Server & Apollo Client
+- Sqlite3 / Knex
+- GraphQL Codegen
+- TypeScript
+- React / react-scripts
+- Prettier / pretty-quick / husky
