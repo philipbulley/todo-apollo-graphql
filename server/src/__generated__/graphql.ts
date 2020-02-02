@@ -19,6 +19,11 @@ export type CreateTodoListFields = {
   name: Scalars['String'];
 };
 
+export type CreateTodoListItemFields = {
+  name?: Maybe<Scalars['String']>;
+  done: Scalars['Boolean'];
+};
+
 export type DeleteTodoListFields = {
   id: Scalars['ID'];
 };
@@ -28,6 +33,7 @@ export type Mutation = {
   createTodoList?: Maybe<TodoList>;
   updateTodoList?: Maybe<TodoList>;
   deleteTodoList?: Maybe<Success>;
+  createTodoListItem?: Maybe<TodoListItem>;
 };
 
 export type MutationCreateTodoListArgs = {
@@ -40,6 +46,11 @@ export type MutationUpdateTodoListArgs = {
 
 export type MutationDeleteTodoListArgs = {
   options: DeleteTodoListFields;
+};
+
+export type MutationCreateTodoListItemArgs = {
+  listId: Scalars['ID'];
+  fields?: Maybe<CreateTodoListItemFields>;
 };
 
 export type Node = {
@@ -250,6 +261,9 @@ export type ResolversTypes = ResolversObject<{
   UpdateTodoListFields: ResolverTypeWrapper<DeepPartial<UpdateTodoListFields>>;
   DeleteTodoListFields: ResolverTypeWrapper<DeepPartial<DeleteTodoListFields>>;
   Success: ResolverTypeWrapper<DeepPartial<Success>>;
+  CreateTodoListItemFields: ResolverTypeWrapper<
+    DeepPartial<CreateTodoListItemFields>
+  >;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -271,6 +285,7 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateTodoListFields: DeepPartial<UpdateTodoListFields>;
   DeleteTodoListFields: DeepPartial<DeleteTodoListFields>;
   Success: DeepPartial<Success>;
+  CreateTodoListItemFields: DeepPartial<CreateTodoListItemFields>;
 }>;
 
 export type MutationResolvers<
@@ -294,6 +309,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationDeleteTodoListArgs, 'options'>
+  >;
+  createTodoListItem?: Resolver<
+    Maybe<ResolversTypes['TodoListItem']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTodoListItemArgs, 'listId'>
   >;
 }>;
 

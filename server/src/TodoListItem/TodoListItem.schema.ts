@@ -5,6 +5,18 @@ export default gql`
     todoListItem(id: ID!): TodoListItem
   }
 
+  extend type Mutation {
+    createTodoListItem(
+      listId: ID!
+      fields: CreateTodoListItemFields
+    ): TodoListItem
+  }
+
+  input CreateTodoListItemFields {
+    name: String
+    done: Boolean!
+  }
+
   type TodoListItemConnection {
     pageInfo: PageInfo!
     edges: [TodoListItemEdge]!

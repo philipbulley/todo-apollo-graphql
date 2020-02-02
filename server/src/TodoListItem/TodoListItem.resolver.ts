@@ -1,4 +1,5 @@
 import {
+  MutationResolvers,
   QueryResolvers,
   Resolver,
   ResolversTypes,
@@ -8,6 +9,9 @@ import { Context } from '../context';
 import { DeepPartial } from 'utility-types';
 import { Item } from '../db/types/Items';
 import { findOne } from './TodoListItem.service';
+import { findOne as findOneList } from '../TodoList/TodoList.service';
+import knex from '../db';
+import { ApolloError } from 'apollo-server';
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('TodoListItem');
 
@@ -38,6 +42,26 @@ export const todoListItem: QueryResolvers['todoListItem'] = async (
   return dbToGraphQL(item);
 };
 
+export const createTodoListItem: MutationResolvers['createTodoListItem'] = async (
+  parent,
+  args
+) => {
+  const list = await findOneList({ where: { id: +args.listId } });
+  if (!list) {
+    throw new ApolloError(
+      `Can't add to list id:${args.listId} as it doesn't exist`,
+      '404'
+    );
+  }
+
+  const ids = await knex('items').insert({
+    ...args.fields,
+    list_id: args.listId
+  });
+
+  return dbToGraphQL(await findOne({ where: { id: ids[0] } }));
+};
+
 const dbToGraphQL = (item: Item | null) =>
   item && {
     ...item,
@@ -50,4 +74,6 @@ export const TodoListItemQuery = {
   todoListItem
 };
 
-export const TodoListItemMutation = {};
+export const TodoListItemMutation = {
+  createTodoListItem
+};

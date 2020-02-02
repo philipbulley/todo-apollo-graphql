@@ -29,7 +29,7 @@ $ yarn start
   - [x] Create List
   - [x] Delete List (and child items)
   - [x] Update List
-  - [ ] Create Item
+  - [x] Create Item
   - [ ] Delete Item
   - [ ] Update Item
   - [ ] Delete Completed Items
