@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon",
     "prettier": "prettier --write \"{*,**/*}.{ts,tsx,json,md,yml,css}\"",
-    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen": "graphql-codegen --config codegen.yml && prettier --write \"src/__generated__/graphql.ts\"",
     "setup": "cd ./src/db && rm -f todo.db.sqlite3 && knex migrate:latest && knex seed:run && cd ../../"
   },
   "dependencies": {
