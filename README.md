@@ -37,7 +37,7 @@ $ yarn start
 
 ### Client
 
-- [ ] Add Apollo Client
+- [x] Add Apollo Client
 - [ ] View Lists
 - [ ] View Items in Lists
 - [ ] Create new Lists
