@@ -73,10 +73,28 @@ export const deleteTodoListItem: MutationResolvers['deleteTodoListItem'] = async
   return { success: result === 1 };
 };
 
+export const updateTodoListItem: MutationResolvers['updateTodoListItem'] = async (
+  parent,
+  args
+) => {
+  const result = await knex('items')
+    .where({ id: args.id })
+    .update({ ...args.fields, updated_at: knex.fn.now() });
+
+  if (result === 0) {
+    throw new ApolloError(
+      `Can't find item with id:${args.id} to update`,
+      '404'
+    );
+  }
+
+  return dbToGraphQL(await findOne({ where: { id: +args.id } }))!;
+};
+
 const dbToGraphQL = (item: Item | null) =>
   item && {
     ...item,
-    id: item.id.toString(),
+    id: item.id?.toString(),
     createdAt: item.created_at,
     updatedAt: item.updated_at,
     listId: item.list_id.toString()
@@ -88,5 +106,6 @@ export const TodoListItemQuery = {
 
 export const TodoListItemMutation = {
   createTodoListItem,
+  updateTodoListItem,
   deleteTodoListItem
 };

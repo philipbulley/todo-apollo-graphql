@@ -31,7 +31,7 @@ $ yarn start
   - [x] Update List
   - [x] Create Item
   - [x] Delete Item
-  - [ ] Update Item
+  - [x] Update Item
   - [ ] Delete Completed Items
 - [ ] Complete pagination implementation
 

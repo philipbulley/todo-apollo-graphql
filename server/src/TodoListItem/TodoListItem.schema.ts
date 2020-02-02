@@ -6,16 +6,14 @@ export default gql`
   }
 
   extend type Mutation {
-    createTodoListItem(
-      listId: ID!
-      fields: CreateTodoListItemFields
-    ): TodoListItem
+    createTodoListItem(listId: ID!, fields: TodoListItemFields): TodoListItem
+    updateTodoListItem(id: ID!, fields: TodoListItemFields!): TodoListItem
     deleteTodoListItem(id: ID!): Success
   }
 
-  input CreateTodoListItemFields {
+  input TodoListItemFields {
     name: String
-    done: Boolean!
+    done: Boolean
   }
 
   type TodoListItemConnection {
