@@ -16,6 +16,26 @@ $ yarn setup
 $ yarn start
 ```
 
+## Features
+
+There are two distinct parts to this demo app, the client and the server:
+
+### Client
+
+- Demonstrates [graphql-codegen](https://graphql-code-generator.com/) to automatically generate TypeScript types based on the remote schema
+  - Data received and sent is fully typed
+  - Auto generates React Hooks for Apollo Queries (queries are baked-in)
+
+### Server
+
+- GraphQL Schema-first development approach
+- Modular schema based around features, extending `Query` and `Mutation`
+- Demonstrates a solution for the GraphQL `n+1` problem using [DataLoader](https://www.npmjs.com/package/dataloader). See `todoListItemsLoader`.
+- Uses [graphql-codegen](https://graphql-code-generator.com/) to automatically generate types (based on the schema) for use in our resolvers.
+- Uses [SQLite 3](https://www.npmjs.com/package/sqlite3) and [Knex](https://www.npmjs.com/package/knex) for light-weight persistent storage
+  - Demonstrates migrations and seed data
+  - Transactions
+
 ## Work In Progress / Roadmap 👷🏽‍♂
 
 ### Server
@@ -25,7 +45,7 @@ $ yarn start
 - [x] Add graphql-codegen
 - [x] Add DB
 - [x] Wire up read Resolvers to DB queries
-- [ ] Create mutations
+- [x] Create mutations
   - [x] Create List
   - [x] Delete List (and child items)
   - [x] Update List
@@ -38,6 +58,7 @@ $ yarn start
 ### Client
 
 - [x] Add Apollo Client
+- [x] Add graphql-codegen
 - [ ] View Lists
 - [ ] View Items in Lists
 - [ ] Create new Lists
