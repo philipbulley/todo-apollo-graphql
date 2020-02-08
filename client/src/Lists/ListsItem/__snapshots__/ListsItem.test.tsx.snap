@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem should render 1`] = `
+.c0 {
+  margin-bottom: 40px;
+}
+
+<div>
+  <div
+    class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiCardContent-root"
+    >
+      <h2
+        class="MuiTypography-root c0 MuiTypography-h2"
+      >
+        Shopping
+      </h2>
+      <i
+        data-testid="ScheduleIcon"
+      />
+      <span
+        class="MuiTypography-root MuiTypography-caption"
+      >
+        11 days ago
+      </span>
+    </div>
+  </div>
+</div>
+`;
