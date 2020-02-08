@@ -1,5 +1,9 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {
+  ThemeProvider,
+  createMuiTheme,
+  responsiveFontSizes
+} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -12,12 +16,14 @@ const Theme: FunctionComponent<ThemeProps> = ({ children }) => {
 
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
-        palette: {
-          // type: prefersDarkMode ? 'dark' : 'light'
-          type: 'dark'
-        }
-      }),
+      responsiveFontSizes(
+        createMuiTheme({
+          palette: {
+            // type: prefersDarkMode ? 'dark' : 'light'
+            type: 'dark'
+          }
+        })
+      ),
     [prefersDarkMode]
   );
 
