@@ -4,6 +4,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ListsItem from './ListsItem/ListsItem';
+import styled from 'styled-components/macro';
 
 type ListsProps = {};
 
@@ -37,12 +38,15 @@ const Lists: FunctionComponent<ListsProps> = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography variant="body1">
+      <Count variant="body1" align="center">
         You have {data.allTodoLists.edges.length} lists.
-      </Typography>
-      {/*<pre>{JSON.stringify({ loading, data, error }, null, 2)}</pre>*/}
+      </Count>
     </>
   );
 };
 
 export default Lists;
+
+const Count = styled(Typography)`
+  margin-top: 40px;
+`;
