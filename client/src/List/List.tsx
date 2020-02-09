@@ -30,7 +30,12 @@ const List: FunctionComponent<ListProps> = () => {
     return (
       <>
         <Typography variant="h2">Oh no!</Typography>
-        <Typography variant="body1">There was an error 😭</Typography>
+        <Typography variant="body1">
+          There was an error{' '}
+          <span role="img" aria-label="Crying">
+            😭
+          </span>
+        </Typography>
         <pre>{JSON.stringify(error, null, 2)}</pre>
       </>
     );

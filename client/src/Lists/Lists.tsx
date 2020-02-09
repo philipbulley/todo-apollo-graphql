@@ -4,7 +4,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ListsItem from './ListsItem/ListsItem';
-import styled from 'styled-components/macro';
 import Count from '../shared/Count/Count';
 
 type ListsProps = {};
@@ -20,7 +19,12 @@ const Lists: FunctionComponent<ListsProps> = () => {
     return (
       <>
         <Typography variant="h2">Oh no!</Typography>
-        <Typography variant="body1">There was an error 😭</Typography>
+        <Typography variant="body1">
+          There was an error{' '}
+          <span role="img" aria-label="Crying">
+            😭
+          </span>
+        </Typography>
         <pre>{JSON.stringify(error, null, 2)}</pre>
       </>
     );
