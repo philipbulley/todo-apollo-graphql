@@ -6,6 +6,7 @@ import MuiList from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ListItem from './ListItem/ListItem';
+import Count from '../shared/Count/Count';
 
 export type ListProps = {};
 export type ListParams = {
@@ -55,6 +56,8 @@ const List: FunctionComponent<ListProps> = () => {
           )}
         </MuiList>
       </Paper>
+
+      <Count number={data.todoList.items.edges.length} itemType="item" />
     </>
   );
 };

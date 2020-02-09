@@ -60,7 +60,7 @@ There are two distinct parts to this demo app, the client and the server:
 - [x] Add Apollo Client
 - [x] Add graphql-codegen
 - [x] View Lists
-- [ ] View Items in Lists
+- [x] View Items in Lists
 - [ ] Create new Lists
 - [ ] Create new Items in Lists
 - [ ] Complete Items in Lists

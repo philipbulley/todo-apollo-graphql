@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ListsItem from './ListsItem/ListsItem';
 import styled from 'styled-components/macro';
+import Count from '../shared/Count/Count';
 
 type ListsProps = {};
 
@@ -38,15 +39,9 @@ const Lists: FunctionComponent<ListsProps> = () => {
           </Grid>
         ))}
       </Grid>
-      <Count variant="body1" align="center">
-        You have {data.allTodoLists.edges.length} lists
-      </Count>
+      <Count number={data.allTodoLists.edges.length} itemType="list" />
     </>
   );
 };
 
 export default Lists;
-
-const Count = styled(Typography)`
-  margin-top: 40px;
-`;
