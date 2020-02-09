@@ -70,9 +70,10 @@ describe('List', () => {
       expect(checkboxes.map(el => el.textContent).length).toBe(5);
     });
 
-    it('each item should have a checkbox', async () => {
+    it('should display total items', async () => {
       const { getByText } = utils;
-      expect(getByText(/^You have.*/).textContent).toBe('You have 5 items');
+      const count = await waitForElement(() => getByText(/^You have.*/));
+      expect(count.textContent).toBe('You have 5 items');
     });
   });
 
