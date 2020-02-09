@@ -25,3 +25,15 @@ export default gql`
     }
   }
 `;
+
+export const updateListItem = gql`
+  mutation UpdateListItem($id: ID!, $fields: TodoListItemFields!) {
+    updateTodoListItem(id: $id, fields: $fields) {
+      id
+      name
+      done
+      createdAt
+      updatedAt
+    }
+  }
+`;

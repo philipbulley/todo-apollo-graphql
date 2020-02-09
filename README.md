@@ -63,7 +63,7 @@ There are two distinct parts to this demo app, the client and the server:
 - [x] View Items in Lists
 - [ ] Create new Lists
 - [ ] Create new Items in Lists
-- [ ] Complete Items in Lists
+- [x] Complete Items in Lists
 - [ ] Delete Lists
 - [ ] Delete Items in Lists
 - [ ] Update List name

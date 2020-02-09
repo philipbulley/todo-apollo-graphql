@@ -164,6 +164,20 @@ export type ListQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export type UpdateListItemMutationVariables = {
+  id: Scalars['ID'];
+  fields: TodoListItemFields;
+};
+
+export type UpdateListItemMutation = { __typename?: 'Mutation' } & {
+  updateTodoListItem: Maybe<
+    { __typename?: 'TodoListItem' } & Pick<
+      TodoListItem,
+      'id' | 'name' | 'done' | 'createdAt' | 'updatedAt'
+    >
+  >;
+};
+
 export type ListsQueryVariables = {};
 
 export type ListsQuery = { __typename?: 'Query' } & Pick<Query, 'version'> & {
@@ -246,6 +260,61 @@ export type ListLazyQueryHookResult = ReturnType<typeof useListLazyQuery>;
 export type ListQueryResult = ApolloReactCommon.QueryResult<
   ListQuery,
   ListQueryVariables
+>;
+export const UpdateListItemDocument = gql`
+  mutation UpdateListItem($id: ID!, $fields: TodoListItemFields!) {
+    updateTodoListItem(id: $id, fields: $fields) {
+      id
+      name
+      done
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type UpdateListItemMutationFn = ApolloReactCommon.MutationFunction<
+  UpdateListItemMutation,
+  UpdateListItemMutationVariables
+>;
+
+/**
+ * __useUpdateListItemMutation__
+ *
+ * To run a mutation, you first call `useUpdateListItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateListItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateListItemMutation, { data, loading, error }] = useUpdateListItemMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      fields: // value for 'fields'
+ *   },
+ * });
+ */
+export function useUpdateListItemMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    UpdateListItemMutation,
+    UpdateListItemMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    UpdateListItemMutation,
+    UpdateListItemMutationVariables
+  >(UpdateListItemDocument, baseOptions);
+}
+export type UpdateListItemMutationHookResult = ReturnType<
+  typeof useUpdateListItemMutation
+>;
+export type UpdateListItemMutationResult = ApolloReactCommon.MutationResult<
+  UpdateListItemMutation
+>;
+export type UpdateListItemMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  UpdateListItemMutation,
+  UpdateListItemMutationVariables
 >;
 export const ListsDocument = gql`
   query Lists {

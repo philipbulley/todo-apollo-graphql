@@ -2,18 +2,23 @@ import { ListQuery } from '../__generated__/graphql';
 
 export const GROCERIES_LIST: ListQuery = {
   todoList: {
+    __typename: 'TodoList',
     id: '1',
     name: 'Groceries',
     createdAt: '2019-05-25 13:33:15',
     updatedAt: '2019-06-10 21:33:23',
     items: {
+      __typename: 'TodoListItemConnection',
       pageInfo: {
+        __typename: 'PageInfo',
         hasNextPage: false
       },
       edges: [
         {
+          __typename: 'TodoListItemEdge',
           cursor: 'Lb',
           node: {
+            __typename: 'TodoListItem',
             id: '1',
             name: 'Bananas',
             done: false,
@@ -22,8 +27,10 @@ export const GROCERIES_LIST: ListQuery = {
           }
         },
         {
+          __typename: 'TodoListItemEdge',
           cursor: 'gm',
           node: {
+            __typename: 'TodoListItem',
             id: '2',
             name: 'Apples',
             done: false,
@@ -32,8 +39,10 @@ export const GROCERIES_LIST: ListQuery = {
           }
         },
         {
+          __typename: 'TodoListItemEdge',
           cursor: 'kb',
           node: {
+            __typename: 'TodoListItem',
             id: '3',
             name: 'Bangers',
             done: false,
@@ -42,8 +51,10 @@ export const GROCERIES_LIST: ListQuery = {
           }
         },
         {
+          __typename: 'TodoListItemEdge',
           cursor: '9d',
           node: {
+            __typename: 'TodoListItem',
             id: '4',
             name: 'Mash',
             done: false,
@@ -52,8 +63,10 @@ export const GROCERIES_LIST: ListQuery = {
           }
         },
         {
+          __typename: 'TodoListItemEdge',
           cursor: 'lb',
           node: {
+            __typename: 'TodoListItem',
             id: '5',
             name: 'Pizza',
             done: false,

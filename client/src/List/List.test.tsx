@@ -1,7 +1,13 @@
 import React from 'react';
-import { render, wait, RenderResult } from '@testing-library/react';
+import {
+  render,
+  wait,
+  RenderResult,
+  fireEvent,
+  waitForElement
+} from '@testing-library/react';
 import List from './List';
-import listQuery from './List.gql';
+import listQuery, { updateListItem } from './List.gql';
 import { GROCERIES_LIST } from './List.fixture';
 import { useParams } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
@@ -11,30 +17,29 @@ jest.mock('react-router-dom', () => ({
 }));
 const useParamsMock = useParams as jest.Mock;
 
+const GROCERIES_LIST_MOCK_QUERY = {
+  request: {
+    query: listQuery,
+    variables: {
+      id: 1
+    }
+  },
+  result: {
+    data: {
+      ...GROCERIES_LIST
+    }
+  }
+};
+
 describe('List', () => {
+  let utils: RenderResult;
   beforeEach(() => {
     useParamsMock.mockReturnValue({ listId: 1 });
   });
 
   describe('rendering', () => {
-    let utils: RenderResult;
-
     beforeEach(async () => {
-      const mocks = [
-        {
-          request: {
-            query: listQuery,
-            variables: {
-              id: 1
-            }
-          },
-          result: {
-            data: {
-              ...GROCERIES_LIST
-            }
-          }
-        }
-      ];
+      const mocks = [GROCERIES_LIST_MOCK_QUERY];
 
       await wait(() => {
         utils = render(
@@ -61,12 +66,59 @@ describe('List', () => {
 
     it('each item should have a checkbox', async () => {
       const { getAllByRole } = utils;
-      expect(getAllByRole('checkbox').map(el => el.textContent).length).toBe(5);
+      const checkboxes = await waitForElement(() => getAllByRole('checkbox'));
+      expect(checkboxes.map(el => el.textContent).length).toBe(5);
     });
 
     it('each item should have a checkbox', async () => {
       const { getByText } = utils;
       expect(getByText(/^You have.*/).textContent).toBe('You have 5 items');
+    });
+  });
+
+  describe('toggling done on items', () => {
+    beforeEach(async () => {
+      const mocks = [
+        GROCERIES_LIST_MOCK_QUERY,
+        {
+          request: {
+            query: updateListItem,
+            variables: {
+              id: '1',
+              fields: {
+                done: true
+              }
+            }
+          },
+          result: {
+            data: {
+              updateTodoListItem: {
+                ...GROCERIES_LIST.todoList?.items.edges[0].node,
+                done: true
+              }
+            }
+          }
+        }
+      ];
+      await wait(() => {
+        utils = render(
+          <MockedProvider mocks={mocks}>
+            <List />
+          </MockedProvider>
+        );
+      });
+    });
+
+    it('should mark an item as done when clicking checkbox', async () => {
+      const { getAllByRole } = utils;
+      const checkboxes = await waitForElement(() => getAllByRole('checkbox'));
+      let checkbox = checkboxes[0];
+      expect(checkbox).not.toBeChecked();
+
+      fireEvent.click(checkbox);
+      await wait();
+
+      expect(checkbox).toBeChecked();
     });
   });
 });
