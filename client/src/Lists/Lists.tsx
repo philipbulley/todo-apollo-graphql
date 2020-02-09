@@ -39,7 +39,7 @@ const Lists: FunctionComponent<ListsProps> = () => {
         ))}
       </Grid>
       <Count variant="body1" align="center">
-        You have {data.allTodoLists.edges.length} lists.
+        You have {data.allTodoLists.edges.length} lists
       </Count>
     </>
   );

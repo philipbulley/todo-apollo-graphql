@@ -136,6 +136,34 @@ export type TodoListItemFields = {
   done?: Maybe<Scalars['Boolean']>;
 };
 
+export type ListQueryVariables = {
+  id: Scalars['ID'];
+};
+
+export type ListQuery = { __typename?: 'Query' } & {
+  todoList: Maybe<
+    { __typename?: 'TodoList' } & Pick<
+      TodoList,
+      'id' | 'name' | 'createdAt' | 'updatedAt'
+    > & {
+        items: { __typename?: 'TodoListItemConnection' } & {
+          pageInfo: { __typename?: 'PageInfo' } & Pick<PageInfo, 'hasNextPage'>;
+          edges: Array<
+            { __typename?: 'TodoListItemEdge' } & Pick<
+              TodoListItemEdge,
+              'cursor'
+            > & {
+                node: { __typename?: 'TodoListItem' } & Pick<
+                  TodoListItem,
+                  'id' | 'name' | 'done' | 'createdAt' | 'updatedAt'
+                >;
+              }
+          >;
+        };
+      }
+  >;
+};
+
 export type ListsQueryVariables = {};
 
 export type ListsQuery = { __typename?: 'Query' } & Pick<Query, 'version'> & {
@@ -152,6 +180,73 @@ export type ListsQuery = { __typename?: 'Query' } & Pick<Query, 'version'> & {
     };
   };
 
+export const ListDocument = gql`
+  query List($id: ID!) {
+    todoList(id: $id) {
+      id
+      name
+      createdAt
+      updatedAt
+      items {
+        pageInfo {
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            id
+            name
+            done
+            createdAt
+            updatedAt
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useListQuery__
+ *
+ * To run a query within a React component, call `useListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useListQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<ListQuery, ListQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<ListQuery, ListQueryVariables>(
+    ListDocument,
+    baseOptions
+  );
+}
+export function useListLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ListQuery,
+    ListQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<ListQuery, ListQueryVariables>(
+    ListDocument,
+    baseOptions
+  );
+}
+export type ListQueryHookResult = ReturnType<typeof useListQuery>;
+export type ListLazyQueryHookResult = ReturnType<typeof useListLazyQuery>;
+export type ListQueryResult = ApolloReactCommon.QueryResult<
+  ListQuery,
+  ListQueryVariables
+>;
 export const ListsDocument = gql`
   query Lists {
     version
