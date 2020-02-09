@@ -25,6 +25,8 @@ There are two distinct parts to this demo app, the client and the server:
 - Demonstrates [graphql-codegen](https://graphql-code-generator.com/) to automatically generate TypeScript types based on the remote schema
   - Data received and sent is fully typed
   - Auto generates React Hooks for Apollo Queries (queries are baked-in)
+- Testing of GraphQL Queries and Mutations
+- Optimistic updates when executing mutations
 
 ### Server
 
@@ -54,6 +56,7 @@ There are two distinct parts to this demo app, the client and the server:
   - [x] Update Item
   - [x] Delete "Done" Items
 - [ ] Complete pagination implementation
+- [ ] Update List `updated_at` when updating a child item
 
 ### Client
 
@@ -68,6 +71,11 @@ There are two distinct parts to this demo app, the client and the server:
 - [ ] Delete Items in Lists
 - [ ] Update List name
 - [ ] Update Item name
+
+#### Nice to have enhancements
+
+- [ ] Use skeleton screen when loading components
+- [ ] Display number of items `done`/`total` on `ListsItem`
 
 ## Tech
 
