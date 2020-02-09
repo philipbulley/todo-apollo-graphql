@@ -12,7 +12,7 @@ const Lists: FunctionComponent<ListsProps> = () => {
   const { loading, data, error } = useListsQuery();
 
   if (loading) {
-    return <LinearProgress />;
+    return <LinearProgress color="secondary" />;
   }
 
   if (error) {

@@ -23,7 +23,7 @@ const List: FunctionComponent<ListProps> = () => {
   });
 
   if (loading) {
-    return <LinearProgress />;
+    return <LinearProgress color="secondary" />;
   }
 
   if (error) {
