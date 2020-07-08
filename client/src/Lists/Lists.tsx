@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { useListsQuery } from '../__generated__/graphql';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ListsItem from './ListsItem/ListsItem';
 import Count from '../shared/Count/Count';
+import CreateList from './CreateList/CreateList';
+import { useListsQuery } from '../__generated__/graphql';
 
 type ListsProps = {};
 
@@ -36,6 +37,7 @@ const Lists: FunctionComponent<ListsProps> = () => {
 
   return (
     <>
+      <CreateList />
       <Grid container spacing={2}>
         {data.allTodoLists.edges.map(({ node }) => (
           <Grid item xs={12} sm={6} key={node.id}>

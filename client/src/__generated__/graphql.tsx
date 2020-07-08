@@ -178,6 +178,19 @@ export type UpdateListItemMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
+export type CreateTodoListMutationVariables = {
+  fields: TodoListFields;
+};
+
+export type CreateTodoListMutation = { __typename?: 'Mutation' } & {
+  createTodoList: Maybe<
+    { __typename?: 'TodoList' } & Pick<
+      TodoList,
+      'id' | 'name' | 'createdAt' | 'updatedAt'
+    >
+  >;
+};
+
 export type ListsQueryVariables = {};
 
 export type ListsQuery = { __typename?: 'Query' } & Pick<Query, 'version'> & {
@@ -315,6 +328,59 @@ export type UpdateListItemMutationResult = ApolloReactCommon.MutationResult<
 export type UpdateListItemMutationOptions = ApolloReactCommon.BaseMutationOptions<
   UpdateListItemMutation,
   UpdateListItemMutationVariables
+>;
+export const CreateTodoListDocument = gql`
+  mutation CreateTodoList($fields: TodoListFields!) {
+    createTodoList(fields: $fields) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type CreateTodoListMutationFn = ApolloReactCommon.MutationFunction<
+  CreateTodoListMutation,
+  CreateTodoListMutationVariables
+>;
+
+/**
+ * __useCreateTodoListMutation__
+ *
+ * To run a mutation, you first call `useCreateTodoListMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTodoListMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTodoListMutation, { data, loading, error }] = useCreateTodoListMutation({
+ *   variables: {
+ *      fields: // value for 'fields'
+ *   },
+ * });
+ */
+export function useCreateTodoListMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CreateTodoListMutation,
+    CreateTodoListMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    CreateTodoListMutation,
+    CreateTodoListMutationVariables
+  >(CreateTodoListDocument, baseOptions);
+}
+export type CreateTodoListMutationHookResult = ReturnType<
+  typeof useCreateTodoListMutation
+>;
+export type CreateTodoListMutationResult = ApolloReactCommon.MutationResult<
+  CreateTodoListMutation
+>;
+export type CreateTodoListMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateTodoListMutation,
+  CreateTodoListMutationVariables
 >;
 export const ListsDocument = gql`
   query Lists {
