@@ -10,7 +10,7 @@
     "setup": "cd ./src/db && rm -f todo.db.sqlite3 && knex migrate:latest && knex seed:run && cd ../../"
   },
   "dependencies": {
-    "apollo-server": "^2.14.2",
+    "apollo-server": "^2.25.4",
     "dataloader": "^2.0.0",
     "graphql": "^14.6.0",
     "hashids": "^2.1.0",
